@@ -49,9 +49,9 @@
 				<form class="d-flex" role="search">
 					<input class="form-control me-2" type="search"
 						placeholder="Nội dung tìm kiếm" aria-label="Search">
-					<button class="btn btn-outline-success" type="submit">Tìm</button>
-					<a class = "btn btn-primary ms-1" href = "register.jsp">
-						Register
+					<button class="btn btn-outline-success" type="submit">Search</button>
+					<a class = "btn btn-primary ms-1" href = "login.jsp">
+						Login
 					</a>
 				</form>
 			</div>

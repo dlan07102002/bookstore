@@ -95,7 +95,51 @@ public class CustomerDAO implements DAOInterface<Customer> {
 		}
 		return res;
 	}
-	
+
+	public Customer selectByUsernameAndPassword(Customer o) {
+		Customer res = null;
+		try {
+			// B1: Create connection
+			Connection con = JDBCUtil.getConnection();
+
+			// B2: Create preparedStatement
+			String sql = "SELECT * FROM Customer WHERE username=? AND password=?";
+
+			PreparedStatement st = con.prepareStatement(sql);
+			st.setString(1, o.getUsername()); // Set username
+			st.setString(2, o.getPassword()); // Set password
+
+			// B3: Execute sql
+			System.out.println(sql);
+			ResultSet rs = st.executeQuery();
+
+			// B4: Get data
+			while (rs.next()) {
+				String customerId = rs.getString("customerId");
+				String username = rs.getString("username");
+				String password = rs.getString("password");
+				String name = rs.getString("name");
+				boolean sex = rs.getBoolean("sex");
+				String address = rs.getString("address");
+				String ordAddress = rs.getString("ordAddress");
+				String shipTo = rs.getString("shipTo");
+				String email = rs.getString("email");
+				Date birthDate = rs.getDate("birthDate");
+				boolean isUseMsgService = rs.getBoolean("isUseMsgService");
+
+				res = new Customer(customerId, username, password, name, sex, address, ordAddress, shipTo, birthDate,
+						shipTo, email, isUseMsgService);
+
+			}
+
+			// B5: close connection
+			JDBCUtil.closeConnection(con);
+		} catch (Exception e) {
+			e.printStackTrace(); // Log error
+		}
+		return res;
+	}
+
 	public boolean checkUserName(String u) {
 		boolean res = false;
 		try {
@@ -109,7 +153,7 @@ public class CustomerDAO implements DAOInterface<Customer> {
 			st.setString(1, u);
 
 			// B3: Execute sql
-			
+
 			ResultSet rs = st.executeQuery();
 
 			// B4: Get data
@@ -131,20 +175,16 @@ public class CustomerDAO implements DAOInterface<Customer> {
 		try {
 			Connection con = JDBCUtil.getConnection();
 
-			String sql = "INSERT INTO customer(customerId,"
-					+ " username, password, name, sex, address,"
-					+ " ordAddress,"
-					+ "shipTo, birthDate, email, phoneNumber, "
-					+ "isUseMsgService)" +
-					"VALUES(?,?, ?, ?,?, ?,?,?, ?,?, ?, ?)";
+			String sql = "INSERT INTO customer(customerId," + " username, password, name, sex, address,"
+					+ " ordAddress," + "shipTo, birthDate, email, phoneNumber, " + "isUseMsgService)"
+					+ "VALUES(?,?, ?, ?,?, ?,?,?, ?,?, ?, ?)";
 			PreparedStatement st = con.prepareStatement(sql);
 			st.setString(1, c.getCustomerId());
 			st.setString(2, c.getUsername());
 			st.setString(3, c.getPassword());
 			st.setString(4, c.getName());
 			st.setBoolean(5, c.getSex());
-			
-			
+
 			st.setString(6, c.getAddress());
 			st.setString(7, c.getOrdAddress());
 			st.setString(8, c.getShipTo());

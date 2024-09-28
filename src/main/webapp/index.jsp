@@ -1,10 +1,12 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
 
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Bootstrap demo</title>
+<title>Bookstore</title>
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css"
 	rel="stylesheet"
@@ -17,7 +19,7 @@
 	<nav class="navbar navbar-expand-lg bg-light">
 		<div class="container-fluid">
 			<a class="navbar-brand" href="#"> <img
-				src="https://1.bp.blogspot.com/-f_5JLvF9_gU/YZGM7p_fkFI/AAAAAAAAAVo/zHkM8tD3ioAvD1pFznG1kw-QOmOibu5ywCLcBGAsYHQ/s150/1-removebg-preview.png"
+				src="https://www.svgrepo.com/show/232132/duck.svg"
 				alt="Bootstrap" height="24">
 			</a>
 			<button class="navbar-toggler" type="button"
@@ -48,6 +50,9 @@
 					<input class="form-control me-2" type="search"
 						placeholder="Nội dung tìm kiếm" aria-label="Search">
 					<button class="btn btn-outline-success" type="submit">Tìm</button>
+					<a class = "btn btn-primary ms-1" href = "register.jsp">
+						Register
+					</a>
 				</form>
 			</div>
 		</div>
@@ -71,13 +76,13 @@
 					data-bs-ride="carousel">
 					<div class="carousel-inner">
 						<div class="carousel-item active" data-bs-interval="10000">
-							<img src="img/slider/1.png" class="d-block w-100" alt="...">
+							<img src="" class="d-block w-100" alt="...">
 						</div>
 						<div class="carousel-item" data-bs-interval="2000">
-							<img src="img/slider/2.png" class="d-block w-100" alt="...">
+							<img src="" class="d-block w-100" alt="...">
 						</div>
 						<div class="carousel-item">
-							<img src="img/slider/3.png" class="d-block w-100" alt="...">
+							<img src="" class="d-block w-100" alt="...">
 						</div>
 					</div>
 					<button class="carousel-control-prev" type="button"
@@ -96,7 +101,7 @@
 					<div class="col-lg-4 col-md-6 mb-4">
 						<div class="card h-100">
 							<a href="#"><img class="card-img-top"
-								src="img/products/1.png" alt=""></a>
+								src="" alt=""></a>
 							<div class="card-body">
 								<h4 class="card-title">
 									<a href="#">Áo thun Pro-S1</a>
@@ -114,7 +119,7 @@
 					<div class="col-lg-4 col-md-6 mb-4">
 						<div class="card h-100">
 							<a href="#"><img class="card-img-top"
-								src="img/products/2.png" alt=""></a>
+								src="" alt=""></a>
 							<div class="card-body">
 								<h4 class="card-title">
 									<a href="#">Áo thun Pro-S1</a>
@@ -132,7 +137,7 @@
 					<div class="col-lg-4 col-md-6 mb-4">
 						<div class="card h-100">
 							<a href="#"><img class="card-img-top"
-								src="img/products/1.png" alt=""></a>
+								src="" alt=""></a>
 							<div class="card-body">
 								<h4 class="card-title">
 									<a href="#">Áo thun Pro-S1</a>
@@ -184,16 +189,15 @@
 							<title>Bootstrap</title><path fill-rule="evenodd"
 								clip-rule="evenodd"
 								d="M24.509 0c-6.733 0-11.715 5.893-11.492 12.284.214 6.14-.064 14.092-2.066 20.577C8.943 39.365 5.547 43.485 0 44.014v5.972c5.547.529 8.943 4.649 10.951 11.153 2.002 6.485 2.28 14.437 2.066 20.577C12.794 88.106 17.776 94 24.51 94H93.5c6.733 0 11.714-5.893 11.491-12.284-.214-6.14.064-14.092 2.066-20.577 2.009-6.504 5.396-10.624 10.943-11.153v-5.972c-5.547-.529-8.934-4.649-10.943-11.153-2.002-6.484-2.28-14.437-2.066-20.577C105.214 5.894 100.233 0 93.5 0H24.508zM80 57.863C80 66.663 73.436 72 62.543 72H44a2 2 0 01-2-2V24a2 2 0 012-2h18.437c9.083 0 15.044 4.92 15.044 12.474 0 5.302-4.01 10.049-9.119 10.88v.277C75.317 46.394 80 51.21 80 57.863zM60.521 28.34H49.948v14.934h8.905c6.884 0 10.68-2.772 10.68-7.727 0-4.643-3.264-7.207-9.012-7.207zM49.948 49.2v16.458H60.91c7.167 0 10.964-2.876 10.964-8.281 0-5.406-3.903-8.178-11.425-8.178H49.948z"
-								fill="currentColor" /></svg> <span class="fs-5">TITV.vn</span>
+								fill="currentColor" /></svg> <span class="fs-5">DUCLAN.vn</span>
 					</a>
 					<ul class="list-unstyled small text-muted">
-						<li class="mb-2">Đây là phần footer
-						</li>
+						<li class="mb-2">Đây là phần footer</li>
 						<li class="mb-2">Code licensed <a
 							href="https://github.com/twbs/bootstrap/blob/main/LICENSE"
-							target="_blank" rel="license noopener">TITV.vn</a>, docs <a
+							target="_blank" rel="license noopener">DUCLAN.vn</a>, docs <a
 							href="https://creativecommons.org/licenses/by/3.0/"
-							target="_blank" rel="license noopener">CC BY TITV.vn</a>.
+							target="_blank" rel="license noopener">CC BY DUCLAN.vn</a>.
 						</li>
 						<li class="mb-2">Currently v5.2.1.</li>
 					</ul>
@@ -254,13 +258,13 @@
 	</footer>
 	<!-- End Footer -->
 	<script
-	src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
-	integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
-	crossorigin="anonymous"></script>
-<script
-	src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js"
-	integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz"
-	crossorigin="anonymous"></script>
-	
+		src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+		integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js"
+		integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz"
+		crossorigin="anonymous"></script>
+
 </body>
 </html>

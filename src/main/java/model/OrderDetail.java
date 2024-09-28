@@ -91,4 +91,13 @@ public class OrderDetail {
 		this.amount = amount;
 	}
 
+	@Override
+	public String toString() {
+		return "OrderDetail [orderDetailId=" + orderDetailId + ", order=" + order + ", product=" + product
+				+ ", quantity=" + quantity + ", orgPrice=" + orgPrice + ", salePercent=" + salePercent + ", vat=" + vat
+				+ ", amount=" + amount + "]";
+	}
+	
+	
+
 }

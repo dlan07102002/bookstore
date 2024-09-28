@@ -7,6 +7,11 @@ public class Category {
 	public Category() {
 	}
 
+	public Category(String categoryId) {
+
+		this.categoryId = categoryId;
+	}
+
 	public Category(String categoryId, String categoryName) {
 		this.categoryId = categoryId;
 		this.categoryName = categoryName;
@@ -27,5 +32,12 @@ public class Category {
 	public void setCategoryName(String categoryName) {
 		this.categoryName = categoryName;
 	}
+
+	@Override
+	public String toString() {
+		return "Category [categoryId=" + categoryId + ", categoryName=" + categoryName + "]";
+	}
+	
+	
 
 }

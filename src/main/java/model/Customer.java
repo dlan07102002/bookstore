@@ -7,7 +7,7 @@ public class Customer {
 	private String username;
 	private String password;
 	private String name;
-	private String sex;
+	private boolean sex;
 	private String address;
 	private String ordAddress;
 	private String shipTo;
@@ -19,8 +19,12 @@ public class Customer {
 	public Customer() {
 
 	}
+	
+	public Customer(String customerId) {
+		this.customerId = customerId;
+	}
 
-	public Customer(String customerId, String username, String password, String name, String sex, String address,
+	public Customer(String customerId, String username, String password, String name, boolean sex, String address,
 			String ordAddress, String shipTo, Date birthDate, String phoneNumber, String email,
 			boolean isUseMsgService) {
 
@@ -70,11 +74,11 @@ public class Customer {
 		this.name = name;
 	}
 
-	public String getSex() {
+	public boolean getSex() {
 		return sex;
 	}
 
-	public void setSex(String sex) {
+	public void setSex(boolean sex) {
 		this.sex = sex;
 	}
 
@@ -134,4 +138,13 @@ public class Customer {
 		this.isUseMsgService = isUseMsgService;
 	}
 
+	@Override
+	public String toString() {
+		return "Customer [customerId=" + customerId + ", username=" + username + ", password=" + password + ", name="
+				+ name + ", sex=" + sex + ", address=" + address + ", ordAddress=" + ordAddress + ", shipTo=" + shipTo
+				+ ", birthDate=" + birthDate + ", phoneNumber=" + phoneNumber + ", email=" + email
+				+ ", isUseMsgService=" + isUseMsgService + "]";
+	}
+
+	
 }

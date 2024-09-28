@@ -10,7 +10,16 @@ public class Author {
 	private String bio;
 
 	public Author() {
-		super();
+		
+	}
+
+	@Override
+	public String toString() {
+		return "Author [authorId=" + authorId + ", name=" + name + ", birthDate=" + birthDate + ", bio=" + bio + "]";
+	}
+	
+	public Author(String authorId) {
+		this.authorId = authorId;
 	}
 
 	public Author(String authorId, String name, Date birthDate, String bio) {

@@ -35,6 +35,10 @@ public class Order {
 
 	public Order() {
 	}
+	
+	public Order(String orderId) {
+		this.orderId = orderId;
+	}
 
 	public Order(String orderId, Customer customer, String ordAddress, String shipTo, String status,
 			String formOfPayment, String statusOfPayment, double purchased, double remainingAmount, Date ordDate,
@@ -139,5 +143,15 @@ public class Order {
 	public void setShipDate(Date shipDate) {
 		this.shipDate = shipDate;
 	}
+
+	@Override
+	public String toString() {
+		return "Order [orderId=" + orderId + ", customer=" + customer + ", ordAddress=" + ordAddress + ", shipTo="
+				+ shipTo + ", status=" + status + ", formOfPayment=" + formOfPayment + ", statusOfPayment="
+				+ statusOfPayment + ", purchased=" + purchased + ", remainingAmount=" + remainingAmount + ", ordDate="
+				+ ordDate + ", shipDate=" + shipDate + "]";
+	}
+	
+	
 
 }

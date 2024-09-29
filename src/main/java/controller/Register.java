@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import database.CustomerDAO;
 import model.Customer;
+import util.Encoding;
 
 /**
  * Servlet implementation class Register
@@ -73,6 +74,9 @@ public class Register extends HttpServlet {
 		if(!password.equals(confirmPassword)) {
 			error = "Password is not match. Please try again";
 		}
+		else {
+			password = Encoding.toSHA1(password);
+		}
 			
 		if(error.length() > 0) {
 			request.setAttribute("error", error);
@@ -81,11 +85,10 @@ public class Register extends HttpServlet {
 		else {
 			Random rd = new Random();
 			String customerId = System.currentTimeMillis()+ rd.nextInt(1000) + "";
-			boolean sex = false;
-			if(gender.equals("male")) {
-				sex = true;
-			}
-			Customer c = new Customer(customerId, username, confirmPassword, name, sex, address, ordAddress, shipTo, Date.valueOf(birthDate), phoneNumber, email, isUseMsgService != null);
+			boolean sex = gender.equals("male")?true:false;	
+			
+			System.out.println(password);
+			Customer c = new Customer(customerId, username, password, name, sex, address, ordAddress, shipTo, Date.valueOf(birthDate), phoneNumber, email, isUseMsgService != null);
 			cDao.insert(c);
 			url = "/success.jsp";
 		}

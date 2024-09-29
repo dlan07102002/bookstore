@@ -12,6 +12,7 @@ import javax.servlet.http.HttpSession;
 
 import database.CustomerDAO;
 import model.Customer;
+import util.Encoding;
 
 /**
  * Servlet implementation class Login
@@ -42,6 +43,8 @@ public class Login extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
+		password = Encoding.toSHA1(password);
+		
 		
 		CustomerDAO cDao = new CustomerDAO();
 		Customer c = new Customer();

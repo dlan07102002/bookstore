@@ -48,15 +48,17 @@ public class Login extends HttpServlet {
 		c.setUsername(username);
 		c.setPassword(password);
 		c = cDao.selectByUsernameAndPassword(c);
+		
+		
 		String url = "";
 		if(c != null) {
 			HttpSession session = request.getSession();
 			session.setAttribute("customer", c);
-			url = "index.jsp";
+			url = "/index.jsp";
 		}
 		else {
 			request.setAttribute("error", "Username or Password is incorrect. Please try again!");
-			url = "login.jsp";
+			url = "/login.jsp";
 		}
 		
 		RequestDispatcher rd = getServletContext().getRequestDispatcher(url);

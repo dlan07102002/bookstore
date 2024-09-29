@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@page import="model.Customer"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -19,8 +20,8 @@
 	<nav class="navbar navbar-expand-lg bg-light">
 		<div class="container-fluid">
 			<a class="navbar-brand" href="#"> <img
-				src="https://www.svgrepo.com/show/232132/duck.svg"
-				alt="Bootstrap" height="24">
+				src="https://www.svgrepo.com/show/232132/duck.svg" alt="Bootstrap"
+				height="24">
 			</a>
 			<button class="navbar-toggler" type="button"
 				data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
@@ -50,9 +51,37 @@
 					<input class="form-control me-2" type="search"
 						placeholder="Nội dung tìm kiếm" aria-label="Search">
 					<button class="btn btn-outline-success" type="submit">Search</button>
-					<a class = "btn btn-primary ms-1" href = "login.jsp">
-						Login
-					</a>
+					<%
+					Object o = session.getAttribute("customer");
+					Customer c = null;
+					if (o != null)
+						c = (Customer) o;
+
+					if (c == null) {
+					%>
+					<a class="btn btn-primary ms-1" href="login.jsp"> Login </a>
+					<%
+					} else {
+					%>
+					<div style = "margin-left: 0.25rem">
+						<div class = "row" >
+							<a style="white-space: nowrap"> Welcome <b><%=c.getUsername()%>
+							</b> <br />
+							</a>
+						</div>
+						<div class = "row">
+							<a style="white-space: nowrap" href="log-out"> Log out </a>
+						</div>
+
+
+					</div>
+
+
+					<%
+					}
+					%>
+
+
 				</form>
 			</div>
 		</div>
@@ -100,8 +129,7 @@
 				<div class="row">
 					<div class="col-lg-4 col-md-6 mb-4">
 						<div class="card h-100">
-							<a href="#"><img class="card-img-top"
-								src="" alt=""></a>
+							<a href="#"><img class="card-img-top" src="" alt=""></a>
 							<div class="card-body">
 								<h4 class="card-title">
 									<a href="#">Áo thun Pro-S1</a>
@@ -118,8 +146,7 @@
 					</div>
 					<div class="col-lg-4 col-md-6 mb-4">
 						<div class="card h-100">
-							<a href="#"><img class="card-img-top"
-								src="" alt=""></a>
+							<a href="#"><img class="card-img-top" src="" alt=""></a>
 							<div class="card-body">
 								<h4 class="card-title">
 									<a href="#">Áo thun Pro-S1</a>
@@ -136,8 +163,7 @@
 					</div>
 					<div class="col-lg-4 col-md-6 mb-4">
 						<div class="card h-100">
-							<a href="#"><img class="card-img-top"
-								src="" alt=""></a>
+							<a href="#"><img class="card-img-top" src="" alt=""></a>
 							<div class="card-body">
 								<h4 class="card-title">
 									<a href="#">Áo thun Pro-S1</a>

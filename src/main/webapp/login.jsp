@@ -14,6 +14,12 @@
 	rel="stylesheet"
 	integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT"
 	crossorigin="anonymous">
+	
+<style>
+	.red{
+		color: red;
+	}
+</style>
 
 <%
 String url = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
@@ -23,7 +29,7 @@ String url = request.getScheme() + "://" + request.getServerName() + ":" + reque
 </head>
 
 <body>
-	<form class="form-signin" action = "/login" method = "POST">
+	<form class="form-signin" action = "login" method = "POST">
 		<div class="text-center">
 			<img class="mb-4 " class="rounded "
 				src="https://www.svgrepo.com/show/232132/duck.svg" alt="" width="72">
@@ -31,6 +37,12 @@ String url = request.getScheme() + "://" + request.getServerName() + ":" + reque
 
 		<h1 class="h3 mb-3 font-weight-normal text-center">Please sign
 			in</h1>
+			
+		<%
+			String err = request.getAttribute("error") + "";
+			err = (err.equals("null"))?"":err;
+		%>
+		<div class = "text-center "><span class="red"><%=err %></span></div>
 		<label for="username" class="sr-only">User name</label> <input
 			type="text" id="username" name="username" class="form-control"
 			placeholder="Email address" required autofocus> <label

@@ -55,6 +55,7 @@
 	String isUseMsgService_str = request.getAttribute("isUseMsgService") + "";
 	isUseMsgService_str = (isUseMsgService_str.equals("null")) ? "" : isUseMsgService_str;
 	%>
+	<jsp:include page="../header.jsp"></jsp:include>
 	<div class="container">
 		<h3 style="text-align: center">Register</h3>
 
@@ -176,6 +177,7 @@
 			</div>
 		</form>
 	</div>
+	<jsp:include page="../footer.jsp"></jsp:include>
 	<script
 		src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
 		integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"

@@ -17,9 +17,53 @@
 	crossorigin="anonymous">
 
 </head>
+
 <style>
 .red {
 	color: red;
+}
+
+.dropbtn {
+	background-color: #04AA6D;
+	color: white;
+	margin-left: 0.25rem;
+	font-size: 1 rem;
+	border: none;
+}
+
+.dropdown {
+	position: relative;
+	display: inline-block;
+}
+
+.dropdown-content {
+	display: none;
+	position: absolute;
+	background-color: #f1f1f1;
+	min-width: 160px;
+	box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+	z-index: 1;
+}
+
+.dropdown-content a {
+	color: black;
+	padding: 12px 16px;
+	text-decoration: none;
+	display: block;
+}
+
+.dropdown-content a:hover {
+	background-color: #ddd;
+}
+
+.dropdown:hover .dropdown-content {
+	display: block;
+	right: 0;
+	z-index: 9999;
+}
+
+.dropdown:hover .dropbtn {
+	background-color: #3e8e41;
 }
 </style>
 <body>
@@ -36,19 +80,19 @@
 	} else {
 	String err = request.getAttribute("error") + "";
 	err = (err.equals("null")) ? "" : err;
-	
+
 	String name = c.getName();
 	System.out.println(name);
 	String birthDate_str = c.getBirthDate() + "";
-	String gender_str = (c.getSex())?"male":"female";
+	String gender_str = (c.getSex()) ? "male" : "female";
 	String address = c.getAddress();
 	String ordAddress = c.getOrdAddress();
 	String shipTo = c.getShipTo();
 	String email = c.getEmail();
 	String phoneNumber = c.getPhoneNumber();
 	boolean isUseMsgService = c.isUseMsgService();
-	
 	%>
+	<jsp:include page="../header.jsp"></jsp:include>
 	<div class="container">
 		<h3 style="text-align: center">User Info</h3>
 
@@ -57,7 +101,7 @@
 		</div>
 
 		<form class="form" action="../customer" method="POST">
-		<input type = "hidden" name = "action" value = "change-user-info"/>
+			<input type="hidden" name="action" value="change-user-info" />
 			<div class="row">
 				<div class="col-md-6">
 					<div class="mb-3">
@@ -126,10 +170,9 @@
 
 					<div class="mb-3 form-check">
 						<input type="checkbox" class="form-check-input"
-							name="isUseMsgService"
-							<%=(isUseMsgService) ? "checked" : ""%>> <label
-							class="form-check-label" for="exampleCheck1"> Use Message
-							Service</label>
+							name="isUseMsgService" <%=(isUseMsgService) ? "checked" : ""%>>
+						<label class="form-check-label" for="exampleCheck1"> Use
+							Message Service</label>
 					</div>
 
 
@@ -142,7 +185,10 @@
 		</form>
 	</div>
 	
-	<%} %>
+	<%
+	}
+	%>
+	<jsp:include page = "../footer.jsp"></jsp:include>
 	<script
 		src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
 		integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"

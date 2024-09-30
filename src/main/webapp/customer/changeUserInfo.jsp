@@ -99,8 +99,11 @@
 		<div class="red" id="error">
 			<%=err%>
 		</div>
-
-		<form class="form" action="../customer" method="POST">
+<%
+		String url = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
+				+ request.getContextPath();
+		%>
+		<form class="form" action="<%=url %>/customer" method="POST">
 			<input type="hidden" name="action" value="change-user-info" />
 			<div class="row">
 				<div class="col-md-6">

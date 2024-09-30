@@ -14,13 +14,13 @@
 	crossorigin="anonymous">
 </head>
 <style>
-	.red{
-		color: red;
-	}
-	
-	.green{
-		color: green;
-	}
+.red {
+	color: red;
+}
+
+.green {
+	color: green;
+}
 </style>
 <body>
 	<%
@@ -36,7 +36,7 @@
 	} else {
 	String err = request.getAttribute("error") + "";
 	err = (err.equals("null")) ? "" : err;
-	
+
 	String success = request.getAttribute("success") + "";
 	success = (success.equals("null")) ? "" : success;
 	%>
@@ -44,12 +44,15 @@
 		<div class="row justify-content-center">
 			<div class="col-md-6">
 				<h3 class="text-center">Change Password</h3>
-				<span class = "red"> <%=err%>
+				<span class="red"> <%=err%>
+				</span> <span class="green"> <%=success%>
 				</span>
-				<span class = "green"> <%=success%>
-				</span>
-				<form action="../customer" method="POST">
-				<input type = "hidden" name = "action" value = "change-password"/>
+				<%
+				String url = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
+						+ request.getContextPath();
+				%>
+				<form action="<%=url%>/customer" method="POST">
+					<input type="hidden" name="action" value="change-password" />
 					<!-- Current Password -->
 					<div class="mb-3">
 						<label for="currentPassword" class="form-label">Current

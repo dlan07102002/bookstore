@@ -15,6 +15,7 @@ public class Customer {
 	private String phoneNumber;
 	private String email;
 	private boolean isUseMsgService;
+	private String imgPath;
 
 	public Customer() {
 
@@ -22,6 +23,34 @@ public class Customer {
 	
 	public Customer(String customerId) {
 		this.customerId = customerId;
+	}
+	
+
+	public Customer(String customerId, String username, String password, String name, boolean sex, String address,
+			String ordAddress, String shipTo, Date birthDate, String phoneNumber, String email, boolean isUseMsgService,
+			String imgPath) {
+	
+		this.customerId = customerId;
+		this.username = username;
+		this.password = password;
+		this.name = name;
+		this.sex = sex;
+		this.address = address;
+		this.ordAddress = ordAddress;
+		this.shipTo = shipTo;
+		this.birthDate = birthDate;
+		this.phoneNumber = phoneNumber;
+		this.email = email;
+		this.isUseMsgService = isUseMsgService;
+		this.imgPath = imgPath;
+	}
+
+	public String getImgPath() {
+		return imgPath;
+	}
+
+	public void setImgPath(String imgPath) {
+		this.imgPath = imgPath;
 	}
 
 	public Customer(String customerId, String username, String password, String name, boolean sex, String address,
@@ -146,5 +175,4 @@ public class Customer {
 				+ ", isUseMsgService=" + isUseMsgService + "]";
 	}
 
-	
 }

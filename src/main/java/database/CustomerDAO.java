@@ -39,9 +39,10 @@ public class CustomerDAO implements DAOInterface<Customer> {
 				String email = rs.getString("email");
 				Date birthDate = rs.getDate("birthDate");
 				boolean isUseMsgService = rs.getBoolean("isUseMsgService");
+				String imgPath = rs.getString("imgPath");
 
 				Customer Customer = new Customer(customerId, username, password, username, sex, address, ordAddress,
-						shipTo, birthDate, shipTo, email, isUseMsgService);
+						shipTo, birthDate, shipTo, email, isUseMsgService, imgPath);
 				res.add(Customer);
 
 			}
@@ -84,9 +85,10 @@ public class CustomerDAO implements DAOInterface<Customer> {
 				String phoneNumber = rs.getString("phoneNumber");
 				Date birthDate = rs.getDate("birthDate");
 				boolean isUseMsgService = rs.getBoolean("isUseMsgService");
+				String imgPath = rs.getString("imgPath");
 
-				res = new Customer(customerId, username, password, name, sex, address, ordAddress, shipTo, birthDate,
-						phoneNumber, email, isUseMsgService);
+				res = new Customer(customerId, username, password, username, sex, address, ordAddress, shipTo,
+						birthDate, shipTo, email, isUseMsgService, imgPath);
 
 			}
 			// B5: close connection
@@ -128,8 +130,11 @@ public class CustomerDAO implements DAOInterface<Customer> {
 				String phoneNumber = rs.getString("phoneNumber");
 				Date birthDate = rs.getDate("birthDate");
 				boolean isUseMsgService = rs.getBoolean("isUseMsgService");
+				String imgPath = rs.getString("imgPath");
 
-				res = new Customer(customerId, username, password, name, sex, address, ordAddress, shipTo, birthDate, phoneNumber, email, isUseMsgService);
+				res = new Customer(customerId, username, password, username, sex, address, ordAddress, shipTo,
+						birthDate, shipTo, email, isUseMsgService, imgPath);
+
 			}
 
 			// B5: close connection
@@ -176,8 +181,8 @@ public class CustomerDAO implements DAOInterface<Customer> {
 			Connection con = JDBCUtil.getConnection();
 
 			String sql = "INSERT INTO customer(customerId," + " username, password, name, sex, address,"
-					+ " ordAddress," + "shipTo, birthDate, email, phoneNumber, " + "isUseMsgService)"
-					+ "VALUES(?,?, ?, ?,?, ?,?,?, ?,?, ?, ?)";
+					+ " ordAddress," + "shipTo, birthDate, email, phoneNumber, " + "isUseMsgService, imgPath)"
+					+ "VALUES(?,?, ?, ?,?, ?,?,?, ?,?, ?, ?, ?, ?)";
 			PreparedStatement st = con.prepareStatement(sql);
 			st.setString(1, c.getCustomerId());
 			st.setString(2, c.getUsername());
@@ -192,6 +197,7 @@ public class CustomerDAO implements DAOInterface<Customer> {
 			st.setString(10, c.getEmail());
 			st.setString(11, c.getPhoneNumber());
 			st.setBoolean(12, c.isUseMsgService());
+			st.setString(13, c.getImgPath());
 
 			System.out.println(sql);
 
@@ -244,9 +250,9 @@ public class CustomerDAO implements DAOInterface<Customer> {
 		try {
 			Connection con = JDBCUtil.getConnection();
 
-			String sql = "UPDATE Customer SET "  + "username = ?," + "password = ?," + "name = ?,"
-					+ "sex = ?," + "address = ?," + "ordAddress = ?," + "birthDate = ?," + "shipTo = ?," + "email = ?,"
-					+"phoneNumber = ?,"+ "isUseMsgService = ? " + "WHERE CustomerId = ?";
+			String sql = "UPDATE Customer SET " + "username = ?," + "password = ?," + "name = ?," + "sex = ?,"
+					+ "address = ?," + "ordAddress = ?," + "birthDate = ?," + "shipTo = ?," + "email = ?,"
+					+ "phoneNumber = ?," + "isUseMsgService = ?, imgPath = ?" + "WHERE CustomerId = ?";
 			PreparedStatement st = con.prepareStatement(sql);
 
 			st.setString(1, c.getUsername());
@@ -260,11 +266,12 @@ public class CustomerDAO implements DAOInterface<Customer> {
 			st.setString(9, c.getEmail());
 			st.setString(10, c.getPhoneNumber());
 			st.setBoolean(11, c.isUseMsgService());
-			st.setString(12, c.getCustomerId());
+			st.setString(12, c.getImgPath());
+			st.setString(13, c.getCustomerId());
+			
 
 			System.out.println(sql);
 			res = st.executeUpdate();
-			 
 
 		} catch (Exception e) {
 			// TODO: handle exception
@@ -272,7 +279,7 @@ public class CustomerDAO implements DAOInterface<Customer> {
 		}
 		return res;
 	}
-	
+
 	public boolean changePassword(Customer c) {
 		boolean res = false;
 		try {
@@ -283,7 +290,7 @@ public class CustomerDAO implements DAOInterface<Customer> {
 
 			st.setString(1, c.getPassword());
 			st.setString(2, c.getCustomerId());
-			
+
 			System.out.println(sql);
 			st.executeUpdate();
 			res = true;
@@ -295,17 +302,17 @@ public class CustomerDAO implements DAOInterface<Customer> {
 		}
 		return res;
 	}
-	
+
 	public int updateInfo(Customer c) {
 		int res = 0;
 		try {
 			Connection con = JDBCUtil.getConnection();
 
-			String sql = "UPDATE Customer SET "  + "name = ?,"
-					+ "sex = ?," + "address = ?," + "ordAddress = ?," + "birthDate = ?," + "shipTo = ?," + "email = ?,"
-					+ "phoneNumber = ?,"+ "isUseMsgService = ? " + "WHERE CustomerId = ?";
+			String sql = "UPDATE Customer SET " + "name = ?," + "sex = ?," + "address = ?," + "ordAddress = ?,"
+					+ "birthDate = ?," + "shipTo = ?," + "email = ?," + "phoneNumber = ?," + "isUseMsgService = ?, imgPath = ?  "
+					+ "WHERE CustomerId = ?";
 			PreparedStatement st = con.prepareStatement(sql);
-			
+
 			st.setString(1, c.getName());
 			st.setBoolean(2, c.getSex());
 			st.setString(3, c.getAddress());
@@ -315,7 +322,8 @@ public class CustomerDAO implements DAOInterface<Customer> {
 			st.setString(7, c.getEmail());
 			st.setString(8, c.getPhoneNumber());
 			st.setBoolean(9, c.isUseMsgService());
-			st.setString(10, c.getCustomerId());
+			st.setString(10, c.getImgPath());
+			st.setString(11, c.getCustomerId());
 
 			System.out.println(sql);
 			res = st.executeUpdate();
@@ -328,6 +336,27 @@ public class CustomerDAO implements DAOInterface<Customer> {
 		return res;
 	}
 	
-	
+	public int updateImg(Customer c) {
+		int res = 0;
+		try {
+			Connection con = JDBCUtil.getConnection();
+
+			String sql = "UPDATE Customer SET " + "imgPath = ?  "
+					+ "WHERE CustomerId = ?";
+			PreparedStatement st = con.prepareStatement(sql);
+
+			st.setString(1, c.getImgPath());
+			st.setString(2, c.getCustomerId());
+
+			System.out.println(sql);
+			res = st.executeUpdate();
+			System.out.println(res);
+
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		return res;
+	}
 
 }

@@ -1,7 +1,9 @@
 package controller;
 
+import java.io.File;
 import java.io.IOException;
 import java.sql.Date;
+import java.util.List;
 import java.util.Random;
 
 import javax.servlet.RequestDispatcher;
@@ -11,6 +13,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import org.apache.commons.fileupload.FileItem;
+import org.apache.commons.fileupload.FileItemFactory;
+import org.apache.commons.fileupload.FileUploadException;
+import org.apache.commons.fileupload.servlet.ServletFileUpload;
+
+import org.apache.tomcat.util.http.fileupload.disk.DiskFileItemFactory;
 
 import database.CustomerDAO;
 import model.Customer;
@@ -55,9 +64,7 @@ public class CustomerController extends HttpServlet {
 		case "change-password":
 			changePassword(request, response);
 			break;
-		case null:
-			logout(request, response);
-			break;
+	
 		default:
 			throw new IllegalArgumentException("Unexpected value: " + action);
 		}
@@ -120,7 +127,8 @@ public class CustomerController extends HttpServlet {
 		}
 	}
 
-	private void register(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	private void register(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		try {
 			String username = request.getParameter("username");
 			String password = request.getParameter("password");
@@ -173,7 +181,7 @@ public class CustomerController extends HttpServlet {
 
 				System.out.println(password);
 				Customer c = new Customer(customerId, username, password, name, sex, address, ordAddress, shipTo,
-						Date.valueOf(birthDate), phoneNumber, email, isUseMsgService != null);
+						Date.valueOf(birthDate), phoneNumber, email, isUseMsgService != null, null);
 				cDao.insert(c);
 				url = "/customer/success.jsp";
 			}
@@ -190,7 +198,8 @@ public class CustomerController extends HttpServlet {
 
 	}
 
-	private void changePassword(HttpServletRequest request, HttpServletResponse response)  throws ServletException, IOException{
+	private void changePassword(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		try {
 			String currentPassword = request.getParameter("currentPassword");
 			String newPassword = request.getParameter("newPassword");
@@ -227,7 +236,6 @@ public class CustomerController extends HttpServlet {
 							if (ctDao.changePassword(c)) {
 								success = "Change Password Success";
 //							url = "/index.jsp";
-								
 
 							} else {
 								err = "Change Password Failed ";
@@ -253,10 +261,10 @@ public class CustomerController extends HttpServlet {
 			e.printStackTrace();
 		}
 
-
 	}
 
-	private void changeUserInfo(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	private void changeUserInfo(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		try {
 			String name = request.getParameter("name");
 			String gender = request.getParameter("gender");
@@ -284,7 +292,7 @@ public class CustomerController extends HttpServlet {
 
 			if (error.length() > 0) {
 				request.setAttribute("error", error);
-				
+
 			} else {
 				HttpSession session = request.getSession();
 				Object o = session.getAttribute("customer");
@@ -297,7 +305,7 @@ public class CustomerController extends HttpServlet {
 						System.out.println(c.getUsername());
 						boolean sex = gender.equals("male") ? true : false;
 						c = new Customer(customerId, "", "", name, sex, address, ordAddress, shipTo,
-								Date.valueOf(birthDate), phoneNumber, email, isUseMsgService != null);
+								Date.valueOf(birthDate), phoneNumber, email, isUseMsgService != null, null);
 						cDao.updateInfo(c);
 						Customer cChanged = cDao.selectById(c);
 						session.setAttribute("customer", cChanged);
@@ -321,4 +329,5 @@ public class CustomerController extends HttpServlet {
 
 	}
 
+	
 }

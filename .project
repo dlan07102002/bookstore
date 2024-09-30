@@ -47,6 +47,16 @@
 			<locationURI>PARENT-2-PROJECT_LOC/Downloads/activation-1.1.1.jar</locationURI>
 		</link>
 		<link>
+			<name>src/main/webapp/WEB-INF/lib/commons-fileupload-1.5.jar</name>
+			<type>1</type>
+			<locationURI>PARENT-2-PROJECT_LOC/Downloads/commons-fileupload-1.5-bin/commons-fileupload-1.5-bin/commons-fileupload-1.5.jar</locationURI>
+		</link>
+		<link>
+			<name>src/main/webapp/WEB-INF/lib/commons-io-2.9.0.jar</name>
+			<type>1</type>
+			<locationURI>PARENT-2-PROJECT_LOC/Downloads/commons-io-2.9.0-bin/commons-io-2.9.0/commons-io-2.9.0.jar</locationURI>
+		</link>
+		<link>
 			<name>src/main/webapp/WEB-INF/lib/javax.mail.jar</name>
 			<type>1</type>
 			<locationURI>PARENT-2-PROJECT_LOC/Downloads/javax.mail.jar</locationURI>

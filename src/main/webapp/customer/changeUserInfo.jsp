@@ -2,6 +2,7 @@
 <%@page import="com.mysql.cj.callback.UsernameCallback"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@page import="model.Customer"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -23,74 +24,46 @@
 </style>
 <body>
 	<%
-	String err = (request.getAttribute("error") + "").equals("null") ? "" : request.getAttribute("error") + "";
+	Object o = session.getAttribute("customer");
+	Customer c = null;
+	if (o != null)
+		c = (Customer) o;
+	if (c == null) {
+	%>
+	<h1>You are not sign-in to the system. Please back to main page</h1>
 
-	String username = request.getAttribute("username") + "";
-	username = (username.equals("null")) ? "" : username;
-
-	String name = request.getAttribute("name") + "";
-	name = (name.equals("null")) ? "" : name;
-
-	String gender_str = request.getAttribute("gender") + "";
-	gender_str = (gender_str.equals("null")) ? "" : gender_str;
-
-	String birthDate_str = request.getAttribute("birthDate") + "";
-	birthDate_str = (birthDate_str.equals("null")) ? "" : birthDate_str;
-
-	String address = request.getAttribute("address") + "";
-	address = (address.equals("null")) ? "" : address;
-
-	String ordAddress = request.getAttribute("ordAddress") + "";
-	ordAddress = (ordAddress.equals("null")) ? "" : ordAddress;
-
-	String email = request.getAttribute("email") + "";
-	email = (email.equals("null")) ? "" : email;
-
-	String phoneNumber = request.getAttribute("phoneNumber") + "";
-	phoneNumber = (phoneNumber.equals("null")) ? "" : phoneNumber;
-
-	String shipTo = request.getAttribute("shipTo") + "";
-	shipTo = (shipTo.equals("null")) ? "" : shipTo;
-
-	String isUseMsgService_str = request.getAttribute("isUseMsgService") + "";
-	isUseMsgService_str = (isUseMsgService_str.equals("null")) ? "" : isUseMsgService_str;
+	<%
+	} else {
+	String err = request.getAttribute("error") + "";
+	err = (err.equals("null")) ? "" : err;
+	
+	String name = c.getName();
+	System.out.println(name);
+	String birthDate_str = c.getBirthDate() + "";
+	String gender_str = (c.getSex())?"male":"female";
+	String address = c.getAddress();
+	String ordAddress = c.getOrdAddress();
+	String shipTo = c.getShipTo();
+	String email = c.getEmail();
+	String phoneNumber = c.getPhoneNumber();
+	boolean isUseMsgService = c.isUseMsgService();
+	
 	%>
 	<div class="container">
-		<h3 style="text-align: center">Register</h3>
+		<h3 style="text-align: center">User Info</h3>
 
 		<div class="red" id="error">
 			<%=err%>
 		</div>
 
-		<form class="form" action="do-register" method="POST">
+		<form class="form" action="../customer" method="POST">
+		<input type = "hidden" name = "action" value = "change-user-info"/>
 			<div class="row">
 				<div class="col-md-6">
-
-
 					<div class="mb-3">
-						<label for="username" class="form-label">Username <span
-							class="red">*</span></label> <input type="text" class="form-control"
-							id="name" placeholder="Enter your name" name="username"
-							required="required" value=<%=username%>>
-					</div>
-					<div class="mb-3">
-						<label for="password" class="form-label">Password<span
-							class="red">*</span></label> <input type="password" class="form-control"
-							id="password" placeholder="Enter your password" name="password"
-							required="required" onkeyup="checkPasswordMatch()">
-					</div>
-					<div class="mb-3">
-						<label for="confirmPassword" class="form-label"> Confirm
-							Password<span class="red">*</span> <span id="err-msg" class="red"></span>
-						</label> <input type="password" class="form-control" id="confirm-password"
-							placeholder="Enter your password" name="confirmPassword"
-							required="required" onkeyup="checkPasswordMatch()">
-					</div>
-
-					<div class="mb-3">
-						<label for="name" class="form-label">Name</label> <input
+						<label for="name" class="form-label">Full Name</label> <input
 							type="text" class="form-control" id="name" name="name"
-							placeholder="Enter your name" value=<%=name%>>
+							placeholder="Enter your name" value="<%=name%>">
 					</div>
 
 					<div class="mb-3">
@@ -110,71 +83,66 @@
 							<option value="other">Other</option>
 						</select>
 					</div>
-				</div>
-
-				<div class="col-md-6">
-
 					<div class="mb-3">
 						<label for="address" class="form-label">Address <span
 							class="red">*</span></label> <input type="text" class="form-control"
 							id="address" placeholder="Enter your address" name="address"
-							value=<%=address%>>
+							value="<%=address%>">
 					</div>
+				</div>
+
+				<div class="col-md-6">
+
+
 
 					<div class="mb-3">
 						<label for="orderAddress" class="form-label">Order Address
 							<span class="red">*</span>
 						</label> <input type="text" class="form-control" id="orderAddress"
 							placeholder="Enter order address" name="ordAddress"
-							value=<%=ordAddress%>>
+							value="<%=ordAddress%>">
 					</div>
 
 					<div class="mb-3">
 						<label for="shipTo" class="form-label">Ship To </label> <input
 							type="text" class="form-control" id="shipTo"
 							placeholder="Enter shipping address" name="shipTo"
-							value=<%=shipTo%>>
+							value="<%=shipTo%>">
 					</div>
 
 					<div class="mb-3">
 						<label for="email" class="form-label">Email <span
 							class="red">*</span></label> <input type="email" class="form-control"
 							id="email" name="email" placeholder="Enter your email"
-							name="email" value=<%=email%>>
+							name="email" value="<%=email%>">
 					</div>
 
 					<div class="mb-3">
 						<label for="phone" class="form-label">Phone Number <span
 							class="red">*</span></label> <input type="tel" class="form-control"
 							id="phone" placeholder="Enter your phone number"
-							name="phoneNumber" value=<%=phoneNumber%>>
+							name="phoneNumber" value="<%=phoneNumber%>">
 					</div>
 
 					<div class="mb-3 form-check">
 						<input type="checkbox" class="form-check-input"
 							name="isUseMsgService"
-							<%=(!isUseMsgService_str.isEmpty()) ? "checked" : ""%>> <label
+							<%=(isUseMsgService) ? "checked" : ""%>> <label
 							class="form-check-label" for="exampleCheck1"> Use Message
 							Service</label>
 					</div>
 
 
-					<div class="mb-3 form-check">
-						<input type="checkbox" class="form-check-input"
-							name="agreeToTermsandConds" onchange="isCheckBtn()"
-							id="agree-check"> <label class="form-check-label"
-							for="exampleCheck1"> I agree to <a href="#">Terms and
-								Conditions</a>
-						</label>
-					</div>
+
 				</div>
 
-
-				<button type="submit" class="btn btn-primary"
-					style="visibility: hidden" name="register" id="register-btn">Register</button>
+				<button type="submit" class="btn btn-primary" name="save"
+					id="save-btn">Save</button>
 			</div>
 		</form>
 	</div>
+	
+	<%} %>
 	<script
 		src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
 		integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"

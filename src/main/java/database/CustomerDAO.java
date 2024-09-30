@@ -81,11 +81,12 @@ public class CustomerDAO implements DAOInterface<Customer> {
 				String ordAddress = rs.getString("ordAddress");
 				String shipTo = rs.getString("shipTo");
 				String email = rs.getString("email");
+				String phoneNumber = rs.getString("phoneNumber");
 				Date birthDate = rs.getDate("birthDate");
 				boolean isUseMsgService = rs.getBoolean("isUseMsgService");
 
 				res = new Customer(customerId, username, password, name, sex, address, ordAddress, shipTo, birthDate,
-						shipTo, email, isUseMsgService);
+						phoneNumber, email, isUseMsgService);
 
 			}
 			// B5: close connection
@@ -124,12 +125,11 @@ public class CustomerDAO implements DAOInterface<Customer> {
 				String ordAddress = rs.getString("ordAddress");
 				String shipTo = rs.getString("shipTo");
 				String email = rs.getString("email");
+				String phoneNumber = rs.getString("phoneNumber");
 				Date birthDate = rs.getDate("birthDate");
 				boolean isUseMsgService = rs.getBoolean("isUseMsgService");
 
-				res = new Customer(customerId, username, password, name, sex, address, ordAddress, shipTo, birthDate,
-						shipTo, email, isUseMsgService);
-
+				res = new Customer(customerId, username, password, name, sex, address, ordAddress, shipTo, birthDate, phoneNumber, email, isUseMsgService);
 			}
 
 			// B5: close connection
@@ -244,9 +244,9 @@ public class CustomerDAO implements DAOInterface<Customer> {
 		try {
 			Connection con = JDBCUtil.getConnection();
 
-			String sql = "UPDATE Customer SET " + "customerName = ?," + "username = ?," + "password = ?," + "name = ?,"
-					+ "sex = ?," + "address = ?," + "ordAdress = ?," + "birthDate = ?," + "shipTo = ?," + "email = ?,"
-					+ "isUseMsgService = ? " + "WHERE CustomerId = ?";
+			String sql = "UPDATE Customer SET "  + "username = ?," + "password = ?," + "name = ?,"
+					+ "sex = ?," + "address = ?," + "ordAddress = ?," + "birthDate = ?," + "shipTo = ?," + "email = ?,"
+					+"phoneNumber = ?,"+ "isUseMsgService = ? " + "WHERE CustomerId = ?";
 			PreparedStatement st = con.prepareStatement(sql);
 
 			st.setString(1, c.getUsername());
@@ -258,9 +258,64 @@ public class CustomerDAO implements DAOInterface<Customer> {
 			st.setDate(7, c.getBirthDate());
 			st.setString(8, c.getShipTo());
 			st.setString(9, c.getEmail());
-			st.setBoolean(10, c.isUseMsgService());
-			;
-			st.setString(11, c.getCustomerId());
+			st.setString(10, c.getPhoneNumber());
+			st.setBoolean(11, c.isUseMsgService());
+			st.setString(12, c.getCustomerId());
+
+			System.out.println(sql);
+			res = st.executeUpdate();
+			 
+
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		return res;
+	}
+	
+	public boolean changePassword(Customer c) {
+		boolean res = false;
+		try {
+			Connection con = JDBCUtil.getConnection();
+
+			String sql = "UPDATE Customer SET password = ? " + "WHERE CustomerId = ?";
+			PreparedStatement st = con.prepareStatement(sql);
+
+			st.setString(1, c.getPassword());
+			st.setString(2, c.getCustomerId());
+			
+			System.out.println(sql);
+			st.executeUpdate();
+			res = true;
+			System.out.println(res);
+
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		return res;
+	}
+	
+	public int updateInfo(Customer c) {
+		int res = 0;
+		try {
+			Connection con = JDBCUtil.getConnection();
+
+			String sql = "UPDATE Customer SET "  + "name = ?,"
+					+ "sex = ?," + "address = ?," + "ordAddress = ?," + "birthDate = ?," + "shipTo = ?," + "email = ?,"
+					+ "phoneNumber = ?,"+ "isUseMsgService = ? " + "WHERE CustomerId = ?";
+			PreparedStatement st = con.prepareStatement(sql);
+			
+			st.setString(1, c.getName());
+			st.setBoolean(2, c.getSex());
+			st.setString(3, c.getAddress());
+			st.setString(4, c.getOrdAddress());
+			st.setDate(5, c.getBirthDate());
+			st.setString(6, c.getShipTo());
+			st.setString(7, c.getEmail());
+			st.setString(8, c.getPhoneNumber());
+			st.setBoolean(9, c.isUseMsgService());
+			st.setString(10, c.getCustomerId());
 
 			System.out.println(sql);
 			res = st.executeUpdate();
@@ -272,5 +327,7 @@ public class CustomerDAO implements DAOInterface<Customer> {
 		}
 		return res;
 	}
+	
+	
 
 }

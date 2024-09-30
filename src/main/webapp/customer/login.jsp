@@ -29,7 +29,8 @@ String url = request.getScheme() + "://" + request.getServerName() + ":" + reque
 </head>
 
 <body>
-	<form class="form-signin" action = "login" method = "POST">
+	<form class="form-signin" action = "../customer" method = "POST">
+	<input type = "hidden" name = "action" value = "login"/>
 		<div class="text-center">
 			<img class="mb-4 " class="rounded "
 				src="https://www.svgrepo.com/show/232132/duck.svg" alt="" width="72">

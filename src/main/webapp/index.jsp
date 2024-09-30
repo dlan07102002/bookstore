@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@page import="model.Customer"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,6 +15,51 @@
 	integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT"
 	crossorigin="anonymous">
 
+<style>
+.dropbtn {
+	background-color: #04AA6D;
+	color: white;
+	margin-left: 0.25rem;
+	font-size: 1 rem;
+	border: none;
+}
+
+.dropdown {
+	position: relative;
+	display: inline-block;
+}
+
+.dropdown-content {
+	display: none;
+	position: absolute;
+	background-color: #f1f1f1;
+	min-width: 160px;
+	box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+	z-index: 1;
+}
+
+.dropdown-content a {
+	color: black;
+	padding: 12px 16px;
+	text-decoration: none;
+	display: block;
+}
+
+.dropdown-content a:hover {
+	background-color: #ddd;
+}
+
+.dropdown:hover .dropdown-content {
+	display: block;
+	right: 0;
+	z-index: 9999;
+}
+
+
+.dropdown:hover .dropbtn {
+	background-color: #3e8e41;
+}
+</style>
 </head>
 <body>
 	<!-- Menu bar -->
@@ -59,19 +105,25 @@
 
 					if (c == null) {
 					%>
-					<a class="btn btn-primary ms-1" href="login.jsp"> Login </a>
+					<a class="btn btn-primary ms-1" href="customer/login.jsp"> Login </a>
 					<%
 					} else {
 					%>
-					<div style = "margin-left: 0.25rem">
-						<div class = "row" >
-							<a style="white-space: nowrap"> Welcome <b><%=c.getUsername()%>
-							</b> <br />
-							</a>
+
+					<div class="dropdown">
+						<button class="dropbtn btn">My account</button>
+						<div class="dropdown-content">
+							<a href="#">My order</a> 
+							<a href="#">Notification</a> 
+							<a href="customer/changeUserInfo.jsp">Change user info</a>
+							<a href="customer/changePassword.jsp">Change password</a>					
+							<a href="customer?action=logout" style="border-top: #aaa8a8 2px solid;"> Log out </a>
+					
 						</div>
-						<div class = "row">
-							<a style="white-space: nowrap" href="log-out"> Log out </a>
-						</div>
+					</div>
+
+					
+						
 
 
 					</div>
@@ -105,7 +157,9 @@
 					data-bs-ride="carousel">
 					<div class="carousel-inner">
 						<div class="carousel-item active" data-bs-interval="10000">
-							<img src="" class="d-block w-100" alt="...">
+							<img
+								src="https://tint.creativemarket.com/8v5b6VpzB15kYJZhrzXLuctGs79KKJxKAhl7RrvwkhU/width:1200/height:800/gravity:nowe/rt:fill-down/el:1/preset:cm_watermark_retina/czM6Ly9maWxlcy5jcmVhdGl2ZW1hcmtldC5jb20vaW1hZ2VzL3NjcmVlbnNob3RzL3Byb2R1Y3RzLzMwLzMwOC8zMDgwNDgvYm9va3MxLW8uanBn?1713988036"
+								class="d-block w-100" alt="...">
 						</div>
 						<div class="carousel-item" data-bs-interval="2000">
 							<img src="" class="d-block w-100" alt="...">

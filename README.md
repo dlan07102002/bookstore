@@ -1,0 +1,5 @@
+- Lib:
+- commons-fileupload
+- commons-io
+- javax-mail & activation
+- mysql-connector-java
